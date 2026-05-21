@@ -545,6 +545,10 @@ footer .logo-sub{color:var(--red)}
   .lang-btn{padding:0 0.45rem;font-size:10px}
 }
   </style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  emailjs.init("7vKxjaq3rperayK4e");  // ← replace with your Public Key
+</script>  
 </head>
 <body>
 
@@ -1010,15 +1014,15 @@ footer .logo-sub{color:var(--red)}
         </div>
         <div class="form-group">
           <label class="form-label"><span class="t-en">Your Name</span><span class="t-si">ඔබේ නම</span><span class="t-ta">உங்கள் பெயர்</span></label>
-          <input type="text" class="form-input" placeholder="Enter your full name"/>
+          <input type="text" class="form-input" id="user-name" placeholder="Enter your full name"/>
         </div>
         <div class="form-group">
           <label class="form-label"><span class="t-en">Phone Number</span><span class="t-si">දුරකථන අංකය</span><span class="t-ta">தொலைபேசி எண்</span></label>
-          <input type="tel" class="form-input" placeholder="077 xxx xxxx"/>
+          <input type="tel" class="form-input" id="user-phone" placeholder="077 xxx xxxx"/>
         </div>
         <div class="form-group">
           <label class="form-label"><span class="t-en">Service Required</span><span class="t-si">සේවා වර්ගය</span><span class="t-ta">சேவை வகை</span></label>
-          <select class="form-input">
+          <select class="form-input" id="user-service">
             <option value=""><span class="t-en">Select a service...</span></option>
             <option>Mechanical Repair / Servicing</option>
             <option>DTSi Oil Change</option>
@@ -1030,7 +1034,7 @@ footer .logo-sub{color:var(--red)}
         </div>
         <div class="form-group">
           <label class="form-label"><span class="t-en">Message</span><span class="t-si">පණිවිඩය</span><span class="t-ta">செய்தி</span></label>
-          <textarea class="form-input" placeholder="Describe your vehicle and what you need..."></textarea>
+          <textarea class="form-input" id="user-message" placeholder="Describe your vehicle and what you need..."></textarea>
         </div>
         <button class="btn-primary" style="width:100%;justify-content:center" onclick="submitForm()">
           <span class="t-en">Send Enquiry ▸</span>
@@ -1224,12 +1228,35 @@ window.addEventListener('scroll', () => {
 /* ── FORM SUBMIT ───────────────────────────────────── */
 function submitForm() {
   const lang = html.getAttribute('data-lang');
-  const msgs = {
-    en: "Thank you! We'll contact you shortly on your provided number.",
-    si: "ස්තූතියි! ඉක්මනින් ඔබව අමතන්නෙමු.",
-    ta: "நன்றி! விரைவில் உங்களை தொடர்பு கொள்வோம்."
+
+  const params = {
+    from_name: document.getElementById('user-name').value,
+    phone:     document.getElementById('user-phone').value,
+    service:   document.getElementById('user-service').value,
+    message:   document.getElementById('user-message').value,
   };
-  alert(msgs[lang] || msgs.en);
+
+  if (!params.from_name || !params.phone) {
+    alert(lang === 'si' ? 'කරුණාකර ඔබේ නම සහ දුරකථන අංකය ඇතුළු කරන්න.'
+        : lang === 'ta' ? 'தயவுசெய்து உங்கள் பெயர் மற்றும் தொலைபேசி எண்ணை உள்ளிடவும்.'
+        : 'Please enter your name and phone number.');
+    return;
+  }
+
+  emailjs.send(
+    'YOUR_SERVICE_ID',    // ← replace
+    'YOUR_TEMPLATE_ID',   // ← replace
+    params
+  ).then(() => {
+    const msgs = {
+      en: "Thank you! We'll contact you shortly.",
+      si: "ස්තූතියි! ඉක්මනින් ඔබව අමතන්නෙමු.",
+      ta: "நன்றி! விரைவில் தொடர்பு கொள்வோம்."
+    };
+    alert(msgs[lang] || msgs.en);
+  }).catch(() => {
+    alert('Something went wrong. Please call us directly on 027 222 5594.');
+  });
 }
 </script>
 </body>
