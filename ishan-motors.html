@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ishan Motors Polonnaruwa | Service Bajaj Dealer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+/* ═══════════════════════════════════════════════════════
+   CSS CUSTOM PROPERTIES — Dark & Light themes
+═══════════════════════════════════════════════════════ */
+:root {
+  --red:          #D0021B;
+  --red-dark:     #A00015;
+  --accent:       #1A6EFF;
+  --trans:        all 0.38s cubic-bezier(0.4,0,0.2,1);
+  --hero-bg-img:  url('images/hero-workshop.jpg');   /* ← Set this to url('images/hero-workshop.jpg') to show your photo */
+}
+
+[data-theme="dark"] {
+  --bg-base:       #070F26;
+  --bg-surface:    #0D1B3E;
+  --bg-card:       #0F1F45;
+  --bg-elevated:   #162250;
+  --text-primary:  #EEF2FF;
+  --text-secondary:#8FA3CC;
+  --text-muted:    #3D5A90;
+  --border:        rgba(26,110,255,0.13);
+  --border-strong: rgba(26,110,255,0.28);
+  --nav-bg:        rgba(7,15,38,0.93);
+  --stat-bg:       #0F1F45;
+  --form-bg:       rgba(255,255,255,0.04);
+  --form-border:   rgba(255,255,255,0.09);
+  --svc-mech:      #0D1B3E;
+  --svc-cush:      #0A1630;
+  --why-bg:        #0F1F45;
+  --why-hover:     #162250;
+  --footer-bg:     #040A1A;
+  --input-clr:     #EEF2FF;
+  --ph-bg:         #0F1F45;
+  --hours-bg:      rgba(208,2,27,0.06);
+  --hours-border:  rgba(208,2,27,0.2);
+  --logo-clr:      #EEF2FF;
+}
+
+[data-theme="light"] {
+  --bg-base:       #F2F6FF;
+  --bg-surface:    #FFFFFF;
+  --bg-card:       #E9EFFF;
+  --bg-elevated:   #DCE5FF;
+  --text-primary:  #070F26;
+  --text-secondary:#3A547A;
+  --text-muted:    #7A8FAD;
+  --border:        rgba(7,15,38,0.09);
+  --border-strong: rgba(7,15,38,0.18);
+  --nav-bg:        rgba(255,255,255,0.94);
+  --stat-bg:       #E9EFFF;
+  --form-bg:       rgba(7,15,38,0.04);
+  --form-border:   rgba(7,15,38,0.13);
+  --svc-mech:      #E9EFFF;
+  --svc-cush:      #E2EAFF;
+  --why-bg:        #E9EFFF;
+  --why-hover:     #DCE5FF;
+  --footer-bg:     #070F26;
+  --input-clr:     #070F26;
+  --ph-bg:         #DCE5FF;
+  --hours-bg:      rgba(208,2,27,0.04);
+  --hours-border:  rgba(208,2,27,0.14);
+  --logo-clr:      #070F26;
+}
+
+/* ═══════════════════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 68px;
+}
+
+body {
+  font-family:'Barlow',sans-serif;
+  background:var(--bg-base);
+  color:var(--text-primary);
+  overflow-x:hidden;
+  transition:background 0.38s ease,color 0.25s ease;
+}
+
+/* Subtle noise overlay */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9990;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+}
+
+/* Smooth theme transitions on all elements */
+*{transition:background-color 0.35s ease,border-color 0.35s ease,color 0.22s ease}
+/* Exceptions — don't transition these */
+.hero-orb,.badges-inner,.reveal,.why-card::after,svg{transition:none!important}
+
+/* ═══════════════════════════════════════════════════════
+   LANGUAGE VISIBILITY
+═══════════════════════════════════════════════════════ */
+.t-en,.t-si,.t-ta{display:none}
+[data-lang="en"] .t-en{display:inline}
+[data-lang="si"] .t-si{display:inline}
+[data-lang="ta"] .t-ta{display:inline}
+.tb-en,.tb-si,.tb-ta{display:none}
+[data-lang="en"] .tb-en{display:block}
+[data-lang="si"] .tb-si{display:block}
+[data-lang="ta"] .tb-ta{display:block}
+
+/* ═══════════════════════════════════════════════════════
+   SCROLL PROGRESS BAR
+═══════════════════════════════════════════════════════ */
+#scroll-bar{
+  position:fixed;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(to right,var(--red),var(--accent));
+  transform-origin:left;transform:scaleX(0);
+  z-index:9999;transition:none!important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  background:var(--nav-bg);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border-strong);
+}
+.nav-inner{
+  max-width:1240px;margin:0 auto;padding:0 1.5rem;
+  height:66px;display:flex;align-items:center;
+  justify-content:space-between;gap:1rem;
+}
+
+/* Logo */
+.logo-wrap{display:flex;align-items:center;gap:0.75rem;text-decoration:none}
+.logo-hex{
+  width:40px;height:40px;background:var(--red);flex-shrink:0;
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform 0.3s ease!important;
+}
+.logo-hex:hover{transform:rotate(15deg)!important}
+.logo-hex span{font-family:'Bebas Neue',sans-serif;font-size:16px;color:#fff;letter-spacing:1px}
+.logo-text .main{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--logo-clr);line-height:1.1}
+.logo-text .sub{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:3px;color:var(--red);text-transform:uppercase}
+
+/* Desktop nav links */
+.desk-nav{display:flex;align-items:center;gap:1.75rem}
+.desk-nav a{
+  font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-secondary);text-decoration:none;padding:0.25rem 0;position:relative;
+}
+.desk-nav a::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;height:1.5px;
+  background:var(--red);transform:scaleX(0);transform-origin:left;
+  transition:transform 0.3s ease!important;
+}
+.desk-nav a:hover{color:var(--text-primary)}
+.desk-nav a:hover::after{transform:scaleX(1)!important}
+
+/* Nav controls */
+.nav-ctrls{display:flex;align-items:center;gap:0.65rem}
+
+/* Theme button */
+.theme-btn{
+  width:36px;height:36px;border-radius:50%;cursor:pointer;
+  border:1px solid var(--border-strong);background:var(--bg-card);
+  color:var(--text-primary);font-size:15px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.theme-btn:hover{background:var(--bg-elevated);border-color:var(--accent)}
+
+/* Language switcher */
+.lang-sw{
+  display:flex;align-items:center;
+  border:1px solid var(--border-strong);border-radius:5px;overflow:hidden;flex-shrink:0;
+}
+.lang-btn{
+  padding:0 0.6rem;height:34px;
+  font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  background:transparent;color:var(--text-muted);
+  border:none;border-right:1px solid var(--border);cursor:pointer;
+}
+.lang-btn:last-child{border-right:none}
+.lang-btn:hover{background:var(--bg-elevated);color:var(--text-primary)}
+.lang-btn.active{background:var(--accent)!important;color:#fff!important;font-weight:700}
+
+/* CTA button */
+.btn-cta{
+  display:inline-flex;align-items:center;gap:0.45rem;
+  background:var(--red);color:#fff;
+  font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  padding:0.5rem 1.1rem;border:none;cursor:pointer;text-decoration:none;
+  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 100%,8px 100%);
+}
+.btn-cta:hover{background:var(--red-dark)}
+
+/* Hamburger */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;flex-shrink:0}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text-primary);border-radius:2px}
+
+/* Mobile menu */
+#mob-menu{
+  display:none;position:fixed;inset:66px 0 0 0;
+  background:var(--bg-base);
+  flex-direction:column;align-items:center;justify-content:center;gap:2rem;z-index:499;
+}
+#mob-menu.open{display:flex}
+#mob-menu a{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;color:var(--text-primary);text-decoration:none}
+#mob-menu a:hover{color:var(--red)}
+
+/* ═══════════════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════════════ */
+#hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  position:relative;overflow:hidden;
+
+  /* ══════════════════════════════════════════════════
+     BACKGROUND IMAGE — WORKSHOP PHOTO
+     ──────────────────────────────────────────────────
+     TO USE YOUR REAL PHOTO in VS Code:
+       1. Copy your workshop image into:  images/hero-workshop.jpg
+       2. Replace the url() value below with your file path.
+          Example:  url('images/hero-workshop.jpg')
+       3. The overlay opacity is controlled by
+          --hero-overlay-dark and --hero-overlay-light below.
+          Increase the last number (0–1) to make it darker.
+  ══════════════════════════════════════════════════ */
+  background-image:
+    var(--hero-overlay),
+    var(--hero-bg-img, none);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;  /* parallax feel */
+}
+
+/* Overlay colours — dark theme: deep navy tint, light theme: lighter tint */
+[data-theme="dark"]  { --hero-overlay: linear-gradient(135deg, rgba(7,15,38,0.82) 0%, rgba(7,15,38,0.65) 50%, rgba(13,27,62,0.78) 100%); }
+[data-theme="light"] { --hero-overlay: linear-gradient(135deg, rgba(7,15,38,0.82) 0%, rgba(7,15,38,0.65) 50%, rgba(13,27,62,0.78) 100%); }
+
+/* Fallback solid bg when no photo is set */
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--bg-base);
+  z-index: -1;
+}
+
+.hero-orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:0.14;pointer-events:none;animation:float 9s ease-in-out infinite alternate}
+.hero-orb-1{width:500px;height:500px;background:var(--accent);top:-120px;right:3%}
+.hero-orb-2{width:300px;height:300px;background:var(--red);bottom:3%;left:5%;animation-delay:4s}
+@keyframes float{from{transform:translateY(0) scale(1)}to{transform:translateY(-40px) scale(1.05)}}
+
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(26,110,255,0.03) 80px,rgba(26,110,255,0.03) 81px),
+    repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(26,110,255,0.03) 80px,rgba(26,110,255,0.03) 81px);
+}
+
+.hero-content{
+  position:relative;z-index:2;
+  max-width:1240px;margin:0 auto;padding:9rem 1.5rem 5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;width:100%;
+}
+
+/* Frosted glass card wrapping the left copy */
+.hero-text-side{
+  background:rgba(7,15,38,0.38);
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:4px;padding:2.5rem 2.5rem 2rem;
+}
+[data-theme="light"] .hero-text-side{
+  background:rgba(255,255,255,0.5);
+  border:1px solid rgba(255,255,255,0.65);
+}
+
+/* Right side floating panel */
+.hero-photo-side{
+  display:flex;flex-direction:column;gap:1rem;
+  align-self:stretch;justify-content:flex-end;
+}
+.hero-stat-panel{
+  background:rgba(7,15,38,0.6);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(26,110,255,0.2);
+  border-top:3px solid var(--red);
+  padding:1.5rem 1.75rem;
+}
+[data-theme="light"] .hero-stat-panel{
+  background:rgba(255,255,255,0.6);
+  border:1px solid rgba(7,15,38,0.15);
+  border-top:3px solid var(--red);
+}
+.hero-stat-row{
+  display:grid;grid-template-columns:1fr 1px 1fr 1px 1fr;
+  gap:0;align-items:center;
+}
+.hsdiv{background:rgba(255,255,255,0.13);height:40px;align-self:center}
+[data-theme="light"] .hsdiv{background:rgba(7,15,38,0.13)}
+.hstat{text-align:center;padding:0 1rem}
+.hstat .n{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;letter-spacing:2px;line-height:1}
+[data-theme="light"] .hstat .n{color:var(--text-primary)}
+.hstat .l{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-top:3px}
+[data-theme="light"] .hstat .l{color:var(--text-muted)}
+.hero-auth-bar{
+  background:var(--red);padding:0.65rem 1.25rem;
+  display:flex;align-items:center;gap:0.6rem;
+}
+.hero-auth-bar .pd{width:6px;height:6px;background:#fff;border-radius:50%;animation:pulse 2s infinite;flex-shrink:0}
+.hero-auth-bar span{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#fff}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:0.75rem;
+  font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--red);margin-bottom:1.25rem;
+}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--red);display:block}
+
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(52px,7.5vw,100px);
+  line-height:0.9;letter-spacing:3px;color:var(--text-primary);margin-bottom:1.5rem;
+}
+.hero-title .accent{color:var(--red)}
+
+.hero-desc{font-size:16px;line-height:1.8;color:var(--text-secondary);max-width:420px;margin-bottom:2.5rem}
+
+.btn-primary{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  background:var(--red);color:#fff;
+  font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:3px;text-transform:uppercase;
+  padding:0.875rem 2rem;text-decoration:none;border:none;cursor:pointer;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 100%,10px 100%);
+}
+.btn-primary:hover{background:var(--red-dark)}
+
+.btn-outline{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  background:transparent;color:var(--text-primary);
+  font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:3px;text-transform:uppercase;
+  padding:0.875rem 2rem;text-decoration:none;
+  border:1px solid var(--border-strong);cursor:pointer;
+}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+
+.hero-badges{display:flex;align-items:center;gap:1.5rem;margin-top:2.5rem;flex-wrap:wrap}
+.hb-item .num{font-family:'Bebas Neue',sans-serif;font-size:25px;color:var(--accent);letter-spacing:2px;line-height:1}
+.hb-item .lbl{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-top:2px}
+.hb-sep{width:1px;height:34px;background:var(--border-strong)}
+
+/* ═══════════════════════════════════════════════════════
+   PHOTO PLACEHOLDERS
+   ────────────────────────────────────────────────────
+   HOW TO REPLACE IN VS CODE:
+   1. Put your image in:  images/filename.jpg
+   2. Find the photo-placeholder div with its id
+   3. Replace the ENTIRE div with:
+      <img src="images/filename.jpg" alt="Description"
+           style="width:100%;display:block;object-fit:cover;aspect-ratio:4/3;"/>
+═══════════════════════════════════════════════════════ */
+.photo-placeholder{
+  width:100%;aspect-ratio:4/3;
+  background:var(--ph-bg);
+  border:2px dashed rgba(208,2,27,0.35);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.7rem;
+  position:relative;overflow:hidden;
+}
+.photo-placeholder::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(45deg,transparent,transparent 12px,rgba(26,110,255,0.022) 12px,rgba(26,110,255,0.022) 24px);
+}
+.ph-icon{width:46px;height:46px;border:2px solid rgba(208,2,27,0.4);display:flex;align-items:center;justify-content:center;font-size:21px}
+.ph-label{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(208,2,27,0.7);text-align:center}
+.ph-hint{font-size:10px;color:var(--text-muted);letter-spacing:0.5px;text-align:center;padding:0 1rem;line-height:1.5}
+.ph-code{font-family:monospace;font-size:9.5px;background:var(--bg-elevated);color:var(--accent);padding:4px 10px;border-radius:3px;margin-top:2px}
+.pc{position:absolute;width:14px;height:14px;border-color:var(--red);border-style:solid}
+.pc.tl{top:8px;left:8px;border-width:2px 0 0 2px}
+.pc.tr{top:8px;right:8px;border-width:2px 2px 0 0}
+.pc.bl{bottom:8px;left:8px;border-width:0 0 2px 2px}
+.pc.br{bottom:8px;right:8px;border-width:0 2px 2px 0}
+
+/* ═══════════════════════════════════════════════════════
+   TICKER
+═══════════════════════════════════════════════════════ */
+.ticker-strip{background:var(--red);padding:0.8rem 0;overflow:hidden}
+.ticker-inner{
+  display:flex;gap:2.5rem;white-space:nowrap;
+  font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#fff;
+  animation:ticker 22s linear infinite;
+}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ═══════════════════════════════════════════════════════
+   SECTIONS BASE
+═══════════════════════════════════════════════════════ */
+section{position:relative}
+.swrap{max-width:1240px;margin:0 auto;padding:0 1.5rem}
+.shdr{display:flex;align-items:flex-end;gap:1.5rem;margin-bottom:3.5rem}
+.snum{font-family:'Bebas Neue',sans-serif;font-size:66px;line-height:1;color:rgba(26,110,255,0.12);letter-spacing:2px;flex-shrink:0}
+.stblock{flex:1}
+.seyebrow{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:0.4rem}
+.stitle{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,5vw,52px);letter-spacing:2px;color:var(--text-primary);line-height:1}
+
+/* ═══════════════════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════════════════ */
+#about{padding:6rem 0;background:var(--bg-base)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.about-text p{font-size:15px;line-height:1.9;color:var(--text-secondary);margin-bottom:1.2rem}
+.about-text p strong{color:var(--text-primary);font-weight:600}
+.dpmc-badge{display:inline-flex;align-items:center;gap:0.75rem;border:1px solid rgba(208,2,27,0.35);padding:0.7rem 1.2rem;margin-bottom:2rem}
+.dpmc-badge .dot{width:7px;height:7px;background:var(--red);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+.dpmc-badge span{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--red)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:2rem}
+.stat-cell{background:var(--stat-bg);padding:1.4rem}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--red);letter-spacing:2px;line-height:1}
+.stat-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-top:0.25rem}
+
+/* ═══════════════════════════════════════════════════════
+   SERVICES
+═══════════════════════════════════════════════════════ */
+#services{padding:6rem 0 0;background:var(--bg-surface)}
+.svc-grid{display:grid;grid-template-columns:1fr 3px 1fr;align-items:stretch}
+.svc-col{padding:2.5rem}
+.svc-col.mech{background:var(--svc-mech)}
+.svc-col.cush{background:var(--svc-cush)}
+.svc-divbar{background:linear-gradient(to bottom,transparent,var(--red),transparent)}
+.svc-hdr{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;padding-bottom:1.4rem;border-bottom:1px solid var(--border)}
+.svc-icon{width:46px;height:46px;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;clip-path:polygon(10% 0,90% 0,100% 50%,90% 100%,10% 100%,0 50%)}
+.svc-col-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;color:var(--text-primary);line-height:1.1}
+.svc-col-sub{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red)}
+.svc-list{list-style:none}
+.svc-list li{display:flex;align-items:flex-start;gap:0.65rem;padding:0.65rem 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--text-secondary);line-height:1.5}
+.svc-list li:last-child{border-bottom:none}
+.svc-list li::before{content:'▸';color:var(--red);font-size:10px;margin-top:3px;flex-shrink:0}
+.svc-list li strong{color:var(--text-primary)}
+
+/* ═══════════════════════════════════════════════════════
+   WHY CHOOSE US
+═══════════════════════════════════════════════════════ */
+#why{padding:6rem 0;background:var(--bg-base)}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
+.why-card{background:var(--why-bg);padding:2.5rem 2rem;position:relative;overflow:hidden}
+.why-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform 0.4s ease!important}
+.why-card:hover{background:var(--why-hover)}
+.why-card:hover::after{transform:scaleX(1)!important}
+.why-icon{font-size:34px;margin-bottom:1.25rem;display:block}
+.why-title{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-primary);margin-bottom:0.6rem}
+.why-desc{font-size:13px;line-height:1.7;color:var(--text-secondary)}
+
+/* ═══════════════════════════════════════════════════════
+   BRANDS
+═══════════════════════════════════════════════════════ */
+#brands{padding:3.5rem 0;background:var(--bg-surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.brands-row{display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap}
+.brand-chip{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;color:var(--text-muted)}
+.brand-chip:hover{color:var(--text-primary)}
+.brand-sep{width:1px;height:28px;background:var(--border)}
+
+/* ═══════════════════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════════════════ */
+#contact{padding:6rem 0;background:var(--bg-surface)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
+.ci{display:flex;align-items:flex-start;gap:1.2rem;margin-bottom:2rem}
+.ci-icon{width:42px;height:42px;background:rgba(208,2,27,0.1);border:1px solid rgba(208,2,27,0.25);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.ci-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:0.2rem}
+.ci-value{font-size:15px;color:var(--text-primary);font-weight:500;line-height:1.5}
+.ci-value a{color:var(--text-primary);text-decoration:none}
+.ci-value a:hover{color:var(--red)}
+.form-panel{background:var(--bg-card);padding:2.5rem;border-top:3px solid var(--red)}
+.form-group{margin-bottom:1.2rem}
+.form-label{display:block;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.45rem}
+.form-input{width:100%;background:var(--form-bg);border:1px solid var(--form-border);color:var(--input-clr);padding:0.7rem 1rem;font-family:'Barlow',sans-serif;font-size:14px;outline:none}
+.form-input:focus{border-color:var(--accent)}
+.form-input::placeholder{color:var(--text-muted)}
+textarea.form-input{resize:vertical;min-height:108px}
+.hours-panel{background:var(--hours-bg);border:1px solid var(--hours-border);padding:1.4rem;margin-top:2rem}
+.hours-title{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:1rem}
+.hours-row{display:flex;justify-content:space-between;padding:0.45rem 0;border-bottom:1px solid var(--border);font-size:13px}
+.hours-row:last-child{border-bottom:none}
+.hours-day{color:var(--text-secondary)}
+.hours-time{color:var(--text-primary);font-weight:500}
+
+/* ═══════════════════════════════════════════════════════
+   FOOTER  (always dark)
+═══════════════════════════════════════════════════════ */
+footer{background:var(--footer-bg);padding:3rem 0 1.5rem;border-top:1px solid rgba(208,2,27,0.2)}
+footer,footer p,footer a,footer .logo-main{color:#EEF2FF}
+footer .logo-sub{color:var(--red)}
+.f-inner{max-width:1240px;margin:0 auto;padding:0 1.5rem}
+.f-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.05)}
+.f-brand p{font-size:13px;line-height:1.8;color:rgba(255,255,255,0.48);margin-top:1rem}
+.f-coltitle{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:1rem}
+.f-links{list-style:none}
+.f-links li{margin-bottom:0.4rem}
+.f-links a{font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none}
+.f-links a:hover{color:#fff}
+.f-bottom{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:1px}
+.f-bottom a{color:var(--red);text-decoration:none}
+
+/* ═══════════════════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease!important}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════ */
+@media(max-width:1024px){
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+  .f-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .desk-nav,.btn-cta{display:none}
+  .hamburger{display:flex}
+  .hero-content{grid-template-columns:1fr;gap:2.5rem;padding-top:7rem}
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .svc-grid{grid-template-columns:1fr}
+  .svc-divbar{width:100%;height:3px;background:linear-gradient(to right,transparent,var(--red),transparent)}
+  .contact-grid{grid-template-columns:1fr;gap:2.5rem}
+  .f-top{grid-template-columns:1fr;gap:2rem}
+  .f-bottom{flex-direction:column;gap:0.5rem;text-align:center}
+  .shdr{flex-direction:column;align-items:flex-start;gap:0.5rem}
+  .why-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .why-grid{grid-template-columns:1fr}
+  .brands-row{gap:1.5rem}
+  .hero-badges{gap:1rem}
+  .lang-btn{padding:0 0.45rem;font-size:10px}
+}
+  </style>
+</head>
+<body>
+
+<!-- Scroll progress bar -->
+<div id="scroll-bar"></div>
+
+<!-- ═══════════════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════════════ -->
+<nav id="main-nav">
+  <div class="nav-inner">
+
+    <a href="#hero" class="logo-wrap">
+      <img src="images/logo.png" alt="Ishan Motors Logo"
+     style="height:100px; width:auto; object-fit:contain;"/>
+      <div class="logo-text">
+        <div class="logo-main" style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;line-height:1.1;color:var(--logo-clr)">Ishan Motors</div>
+        <div class="logo-sub" style="font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase">Polonnaruwa · Sri Lanka</div>
+      </div>
+    </a>
+
+    <div class="desk-nav">
+      <a href="#about"><span class="t-en">About</span><span class="t-si">අප ගැන</span><span class="t-ta">எங்களை பற்றி</span></a>
+      <a href="#services"><span class="t-en">Services</span><span class="t-si">සේවා</span><span class="t-ta">சேவைகள்</span></a>
+      <a href="#why"><span class="t-en">Why Us</span><span class="t-si">ඇයි අපව</span><span class="t-ta">ஏன் நாங்கள்</span></a>
+      <a href="#contact"><span class="t-en">Contact</span><span class="t-si">සම්බන්ධ</span><span class="t-ta">தொடர்பு</span></a>
+    </div>
+
+    <div class="nav-ctrls">
+      <!-- Theme toggle -->
+      <button class="theme-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+        <span id="theme-icon">☀️</span>
+      </button>
+
+      <!-- Language switcher -->
+      <div class="lang-sw">
+        <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" id="btn-si" onclick="setLang('si')">සිං</button>
+        <button class="lang-btn" id="btn-ta" onclick="setLang('ta')">தமிழ்</button>
+      </div>
+
+      <!-- CTA -->
+      <a href="tel:0272225594" class="btn-cta">
+        📞 <span class="t-en">Call Now</span><span class="t-si">අමතන්න</span><span class="t-ta">அழைக்க</span>
+      </a>
+
+      <!-- Hamburger -->
+      <div class="hamburger" onclick="toggleMob()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div id="mob-menu">
+  <a href="#about" onclick="toggleMob()"><span class="t-en">About</span><span class="t-si">අප ගැන</span><span class="t-ta">எங்களை பற்றி</span></a>
+  <a href="#services" onclick="toggleMob()"><span class="t-en">Services</span><span class="t-si">සේවා</span><span class="t-ta">சேவைகள்</span></a>
+  <a href="#why" onclick="toggleMob()"><span class="t-en">Why Us</span><span class="t-si">ඇයි අපව</span><span class="t-ta">ஏன் நாங்கள்</span></a>
+  <a href="#contact" onclick="toggleMob()"><span class="t-en">Contact</span><span class="t-si">සම්බන්ධ</span><span class="t-ta">தொடர்பு</span></a>
+  <div class="lang-sw" style="margin-top:0.5rem">
+    <button class="lang-btn active" id="mbtn-en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" id="mbtn-si" onclick="setLang('si')">සිං</button>
+    <button class="lang-btn" id="mbtn-ta" onclick="setLang('ta')">தமிழ்</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-grid"></div>
+
+  <!--
+  ╔══════════════════════════════════════════════════════════╗
+  ║  HOW TO SET THE HERO BACKGROUND PHOTO IN VS CODE         ║
+  ║  ──────────────────────────────────────────────────────  ║
+  ║  Option A — CSS (recommended):                           ║
+  ║    1. Open this file in VS Code                          ║
+  ║    2. Find the line below that says:                     ║
+  ║         --hero-bg-img: none;                             ║
+  ║    3. Replace 'none' with your image path, e.g.:         ║
+  ║         --hero-bg-img: url('images/hero-workshop.jpg');  ║
+  ║                                                          ║
+  ║  Option B — HTML attribute (easiest):                    ║
+  ║    1. Find the <section id="hero"> tag below             ║
+  ║    2. Add:  data-bg="images/hero-workshop.jpg"           ║
+  ║       The JS at the bottom reads this and applies it.    ║
+  ║                                                          ║
+  ║  Recommended image: 1920×1080 px, JPG, landscape         ║
+  ║  Make sure Bajaj signage is clearly visible!             ║
+  ╚══════════════════════════════════════════════════════════╝
+  Replace "images/hero-workshop.jpg" with your actual file path.
+  Example: data-bg="images/workshop-front.jpg"
+  -->
+
+  <div class="hero-content">
+
+    <!-- LEFT — Copy wrapped in frosted glass card -->
+    <div class="hero-text-side">
+      <div class="hero-eyebrow">
+        <span class="t-en">DPMC Bajaj Service Dealer</span>
+        <span class="t-si">DPMC Bajaj සේවා අලෙවිකරු</span>
+        <span class="t-ta">DPMC Bajaj சேவை சந்தைப்படுத்துபவர்</span>
+      </div>
+
+      <h1 class="hero-title">
+        Ishan<br/><span class="accent">Motors</span><br/>
+        <span style="font-size:0.55em;letter-spacing:4px">Polonnaruwa</span>
+      </h1>
+
+      <p class="hero-desc tb-en">Sri Lanka's trusted name in <strong>Bajaj motorcycles, three-wheelers &amp; QUTE</strong> — delivering genuine parts, expert servicing, and premium interior work.</p>
+      <p class="hero-desc tb-si">ශ්‍රී ලංකාවේ විශ්වාසදායක නාමය — <strong>Bajaj යතුරුපැදි, ත්‍රිරෝද රථ සහ QUTE</strong> — genuine කොටස්, දක්ෂ සේවා සහ ප්‍රිමියම් interior.</p>
+      <p class="hero-desc tb-ta">இலங்கையின் நம்பகமான பெயர் — <strong>Bajaj மோட்டார் சைக்கிள்கள், மூன்று சக்கர வாகனங்கள் &amp; QUTE</strong> — உண்மையான பாகங்கள் மற்றும் நிபுணர் சேவை.</p>
+
+      <div style="display:flex;gap:1rem;flex-wrap:wrap">
+        <a href="#services" class="btn-primary">
+          <span class="t-en">Our Services ▸</span>
+          <span class="t-si">අපේ සේවා ▸</span>
+          <span class="t-ta">சேவைகள் ▸</span>
+        </a>
+        <a href="#contact" class="btn-outline">
+          <span class="t-en">Get in Touch</span>
+          <span class="t-si">අමතන්න</span>
+          <span class="t-ta">தொடர்புகொள்</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT — Floating frosted stats panel -->
+    <div class="hero-photo-side">
+
+      <!-- Credential cards -->
+      <div style="display:flex;flex-direction:column;gap:0.75rem">
+        <div style="background:rgba(208,2,27,0.18);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(208,2,27,0.35);padding:1rem 1.25rem;display:flex;align-items:center;gap:0.75rem">
+          <div style="width:8px;height:8px;background:var(--red);border-radius:50%;animation:pulse 2s infinite;flex-shrink:0"></div>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#fff;font-weight:600">
+            <span class="t-en">DPMC Bajaj Service Dealer</span>
+            <span class="t-si">DPMC Bajaj සේවා අලෙවිකරු</span>
+            <span class="t-ta">DPMC Bajaj சேவை சந்தைப்படுத்துபவர்</span>
+          </span>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+          <div style="background:rgba(7,15,38,0.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(26,110,255,0.2);padding:1.1rem 1.25rem">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--accent);letter-spacing:2px;line-height:1">BAJAJ</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:3px">
+              <span class="t-en">Specialist</span><span class="t-si">විශේෂඥ</span><span class="t-ta">நிபுணர்</span>
+            </div>
+          </div>
+          <div style="background:rgba(7,15,38,0.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(26,110,255,0.2);padding:1.1rem 1.25rem">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--accent);letter-spacing:2px;line-height:1">DTSi</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:3px">
+              <span class="t-en">Oil Service</span><span class="t-si">තෙල් සේවා</span><span class="t-ta">எண்ணெய் சேவை</span>
+            </div>
+          </div>
+          <div style="background:rgba(7,15,38,0.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(26,110,255,0.2);padding:1.1rem 1.25rem">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--accent);letter-spacing:2px;line-height:1">3W</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:3px">
+              <span class="t-en">Three-Wheeler</span><span class="t-si">ත්‍රිරෝද රථ</span><span class="t-ta">மூன்று சக்கரம்</span>
+            </div>
+          </div>
+          <div style="background:rgba(7,15,38,0.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(26,110,255,0.2);padding:1.1rem 1.25rem">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--accent);letter-spacing:2px;line-height:1">QUTE</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:3px">
+              <span class="t-en">Authorized</span><span class="t-si">අධිකෘත</span><span class="t-ta">அங்கீகரிக்கப்பட்ட</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Auth bar -->
+      <div class="hero-auth-bar">
+        <div class="pd"></div>
+        <span>
+          <span class="t-en">Authorized Bajaj Service Centre · Polonnaruwa</span>
+          <span class="t-si">අධිකෘත Bajaj සේවා · පොළොන්නරුව</span>
+          <span class="t-ta">Bajaj சேவை மையம் · பொலன்னறுவை</span>
+        </span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Ticker -->
+<div class="ticker-strip">
+  <div class="ticker-inner">
+    <span>Genuine Bajaj Parts</span><span>✦</span><span>Authorized DPMC Dealer</span><span>✦</span>
+    <span>Three-Wheeler Specialist</span><span>✦</span><span>DTSi Oil Service</span><span>✦</span>
+    <span>Professional Upholstery</span><span>✦</span><span>Cushion House Polonnaruwa</span><span>✦</span><span>QUTE Authorized</span><span>✦</span>
+    <span>Genuine Bajaj Parts</span><span>✦</span><span>Authorized DPMC Dealer</span><span>✦</span>
+    <span>Three-Wheeler Specialist</span><span>✦</span><span>DTSi Oil Service</span><span>✦</span>
+    <span>Professional Upholstery</span><span>✦</span><span>Cushion House Polonnaruwa</span><span>✦</span><span>QUTE Authorized</span><span>✦</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     ABOUT
+═══════════════════════════════════════════════════ -->
+<section id="about">
+  <div class="swrap" style="padding-top:6rem;padding-bottom:6rem">
+    <div class="shdr reveal">
+      <div class="snum">01</div>
+      <div class="stblock">
+        <div class="seyebrow"><span class="t-en">Who We Are</span><span class="t-si">අපි කවුරුන්ද</span><span class="t-ta">நாங்கள் யார்</span></div>
+        <div class="stitle">
+          <span class="t-en">Built on Trust,<br/>Backed by Expertise</span>
+          <span class="t-si">විශ්වාසය මත ගොඩනඟා</span>
+          <span class="t-ta">நம்பிக்கையில் கட்டமைக்கப்பட்டது</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="dpmc-badge">
+          <div class="dot"></div>
+          <span><span class="t-en">Authorized David Pieris Motor Company Dealer</span><span class="t-si">DPMC අධිකෘත ව්‍යාපාරිකයා</span><span class="t-ta">DPMC அங்கீகரிக்கப்பட்ட விற்பனையாளர்</span></span>
+        </div>
+
+        <p class="tb-en"><strong>Ishan Motors</strong> is Polonnaruwa's premier authorized dealer for <strong>David Pieris Motor Company (DPMC)</strong> — the sole authorized importer of Bajaj vehicles in Sri Lanka. We specialize in Bajaj motorcycles, three-wheelers, and the innovative QUTE micro-car.</p>
+        <p class="tb-en">Our reputation is built on one promise: <strong>every vehicle leaves our workshop serviced to manufacturer standards</strong>, using only genuine Bajaj spare parts. No shortcuts. No compromises.</p>
+        <p class="tb-en">Beyond the main workshop, <strong>Ishan Motors Cushion House</strong> offers dedicated specialist interior comfort work — crafting and restoring seats and upholstery for bikes and three-wheelers.</p>
+
+        <p class="tb-si"><strong>Ishan Motors</strong> යනු පොළොන්නරුවේ ප්‍රමුඛ DPMC අධිකෘත ව්‍යාපාරිකයා ය. Bajaj යතුරුපැදි, ත්‍රිරෝද රථ, සහ QUTE ගැන විශේෂඥ සේවාවක් ලබා දෙමු. <strong>Ishan Motors Cushion House</strong> vehicle interior comfort සඳහා ලබා දෙන විශේෂ සේවාවකි.</p>
+
+        <p class="tb-ta"><strong>Ishan Motors</strong> பொலன்னறுவையின் முன்னணி DPMC அங்கீகரிக்கப்பட்ட விற்பனையாளர். Bajaj மோட்டார் சைக்கிள்கள், மூன்று சக்கர வாகனங்கள் மற்றும் QUTE சேவையில் நிபுணத்துவம். <strong>Ishan Motors Cushion House</strong> உள்ளக வசதிக்கான சிறப்பு சேவை வழங்குகிறது.</p>
+
+        <div class="stat-grid">
+          <div class="stat-cell reveal"><div class="stat-num">DPMC</div><div class="stat-label"><span class="t-en">Authorized Dealer</span><span class="t-si">අධිකෘත</span><span class="t-ta">அங்கீகரிக்கப்பட்ட</span></div></div>
+          <div class="stat-cell reveal"><div class="stat-num">100%</div><div class="stat-label"><span class="t-en">Genuine Bajaj Parts</span><span class="t-si">නිෂ්පාදිත කොටස්</span><span class="t-ta">உண்மையான பாகங்கள்</span></div></div>
+          <div class="stat-cell reveal"><div class="stat-num">3W+</div><div class="stat-label"><span class="t-en">Three-Wheeler Specialist</span><span class="t-si">ත්‍රිරෝද රථ</span><span class="t-ta">மூன்று சக்கர நிபுணர்</span></div></div>
+          <div class="stat-cell reveal"><div class="stat-num">2-in-1</div><div class="stat-label"><span class="t-en">Workshop + Cushion House</span><span class="t-si">කාර්යශාලා + Cushion</span><span class="t-ta">பட்டறை + குஷன்</span></div></div>
+        </div>
+      </div>
+
+      <!-- About photo
+      ╔═══════════════════════════════════════════════╗
+      ║  REPLACE → images/team-workshop.jpg           ║
+      ║  Delete this photo-placeholder div and paste: ║
+      ║  <img src="images/team-workshop.jpg"          ║
+      ║       alt="Ishan Motors Team"                 ║
+      ║       style="width:100%;display:block;        ║
+      ║              object-fit:cover;"/>             ║
+      ╚═══════════════════════════════════════════════╝ -->
+      <div class="reveal">
+        <div class="photo-placeholder" id="photo-about">
+          <div class="pc tl"></div><div class="pc tr"></div>
+          <div class="pc bl"></div><div class="pc br"></div>
+          <div class="ph-icon">🏭</div>
+          <div class="ph-label"><span class="t-en">Workshop / Team Photo</span><span class="t-si">කාර්යශාලා / කණ්ඩායම</span><span class="t-ta">பட்டறை / குழு புகைப்படம்</span></div>
+          <div class="ph-hint">Team or exterior shot — landscape preferred</div>
+          <div class="ph-code">→ images/team-workshop.jpg</div>
+        </div>
+        <div style="margin-top:1rem;padding:1.2rem;background:var(--bg-card);border-left:3px solid var(--accent)">
+          <p style="font-size:13px;line-height:1.7;color:var(--text-secondary);font-style:italic">
+            <span class="t-en">"Ishan Motors has become the go-to name in Polonnaruwa for anyone who relies on their Bajaj vehicle every day."</span>
+            <span class="t-si">"Ishan Motors යනු Polonnaruwa හි Bajaj රථ හිමිකරුවන්ගේ විශ්වාසනීය නමකි."</span>
+            <span class="t-ta">"Ishan Motors பொலன்னறுவையில் Bajaj வாகன உரிமையாளர்களுக்கு நம்பகமான பெயர்."</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SERVICES
+═══════════════════════════════════════════════════ -->
+<section id="services">
+  <div class="swrap" style="padding-top:6rem;padding-bottom:4rem">
+    <div class="shdr reveal">
+      <div class="snum">02</div>
+      <div class="stblock">
+        <div class="seyebrow"><span class="t-en">What We Do</span><span class="t-si">අපි කරන දේ</span><span class="t-ta">நாங்கள் செய்வது</span></div>
+        <div class="stitle"><span class="t-en">Our Services</span><span class="t-si">අපේ සේවාවන්</span><span class="t-ta">எங்கள் சேவைகள்</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-grid">
+    <!-- Mechanical column -->
+    <div class="svc-col mech reveal">
+      <div class="svc-hdr">
+        <div class="svc-icon">🔧</div>
+        <div>
+          <div class="svc-col-title"><span class="t-en">Mechanical &amp; Spare Parts</span><span class="t-si">යාන්ත්‍රික &amp; කොටස්</span><span class="t-ta">இயந்திர &amp; உதிரிபாகங்கள்</span></div>
+          <div class="svc-col-sub"><span class="t-en">Ishan Motors — Main Workshop</span><span class="t-si">ප්‍රධාන කාර්යශාලාව</span><span class="t-ta">முக்கிய பட்டறை</span></div>
+        </div>
+      </div>
+      <ul class="svc-list">
+        <li><div><strong><span class="t-en">Full Vehicle Servicing</span><span class="t-si">සම්පූර්ණ රථ සේවා</span><span class="t-ta">முழு வாகன சேவை</span></strong> — <span class="t-en">Scheduled maintenance for Bajaj motorcycles, three-wheelers, and QUTE to factory specifications.</span><span class="t-si">Bajaj රථ සඳහා සංශෝධන.</span><span class="t-ta">Bajaj வாகனங்களுக்கு திட்டமிட்ட பராமரிப்பு.</span></div></li>
+        <li><div><strong><span class="t-en">Engine Repairs &amp; Overhauls</span><span class="t-si">එන්ජින් අලුත්වැඩියා</span><span class="t-ta">இன்ஜின் பழுது</span></strong> — <span class="t-en">Expert diagnosis and repair by certified Bajaj technicians.</span><span class="t-si">Bajaj සහතික කළ තාක්‍ෂණිකයන්.</span><span class="t-ta">Bajaj சான்றிதழ் தொழில்நுட்பவியலாளர்கள்.</span></div></li>
+        <li><div><strong><span class="t-en">Bajaj DTSi Oil Change</span><span class="t-si">DTSi තෙල් ​වෙනස් කිරීම</span><span class="t-ta">DTSi எண்ணெய் மாற்றம்</span></strong> — <span class="t-en">Precision oil service using correct-grade lubricant for DTSi engines, extending engine life.</span><span class="t-si">DTSi එන්ජින් සඳහා නිවැරදි ලිහිල් කාරකය.</span><span class="t-ta">DTSi இன்ஜின்களுக்கு சரியான தரம்.</span></div></li>
+        <li><div><strong><span class="t-en">Genuine Spare Parts Supply</span><span class="t-si">නිෂ්පාදිත කොටස්</span><span class="t-ta">உண்மையான உதிரிபாகங்கள்</span></strong> — <span class="t-en">Full stock of authentic DPMC-supplied Bajaj parts. No counterfeits, ever.</span><span class="t-si">DPMC සපයන Bajaj කොටස් ගබඩාවේ.</span><span class="t-ta">DPMC வழங்கிய Bajaj உதிரிபாகங்கள் கையிருப்பு.</span></div></li>
+        <li><div><strong><span class="t-en">Electrical &amp; Wiring Service</span><span class="t-si">විද්‍යුත් &amp; රැහැන්</span><span class="t-ta">மின்சார &amp; கம்பி</span></strong></div></li>
+        <li><div><strong><span class="t-en">Brake &amp; Suspension Work</span><span class="t-si">Brake &amp; Suspension</span><span class="t-ta">தடை &amp; Suspension</span></strong></div></li>
+        <li><div><strong><span class="t-en">Three-Wheeler Specialist Service</span><span class="t-si">ත්‍රිරෝද රථ සේවා</span><span class="t-ta">மூன்று சக்கர சிறப்பு சேவை</span></strong></div></li>
+        <li><div><strong><span class="t-en">QUTE Micro-Car Servicing</span><span class="t-si">QUTE වාහන සේවා</span><span class="t-ta">QUTE கார் சேவை</span></strong></div></li>
+      </ul>
+      <div style="margin-top:1.75rem;padding:1.1rem;background:rgba(208,2,27,0.07);border:1px solid rgba(208,2,27,0.18)">
+        <p style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:0.35rem">
+          <span class="t-en">Authorized Dealer Guarantee</span><span class="t-si">අධිකෘත තහවුරුව</span><span class="t-ta">அங்கீகரிக்கப்பட்ட உத்தரவாதம்</span>
+        </p>
+        <p style="font-size:12px;color:var(--text-secondary);line-height:1.6">
+          <span class="t-en">All repairs and parts supplied under DPMC-authorized status — your warranty remains fully intact.</span>
+          <span class="t-si">DPMC අධිකෘත තත්ත්වය යටතේ — ඔබේ Warranty හානි නොවේ.</span>
+          <span class="t-ta">DPMC அங்கீகரிக்கப்பட்ட நிலையில் — உங்கள் உத்தரவாதம் பாதுகாக்கப்படுகிறது.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="svc-divbar"></div>
+
+    <!-- Cushion column -->
+    <div class="svc-col cush reveal">
+      <div class="svc-hdr">
+        <div class="svc-icon">🪡</div>
+        <div>
+          <div class="svc-col-title"><span class="t-en">Cushion &amp; Interior Work</span><span class="t-si">කුෂන් &amp; Interior</span><span class="t-ta">குஷன் &amp; உள்ளக வேலை</span></div>
+          <div class="svc-col-sub"><span class="t-en">Ishan Motors — Cushion House</span><span class="t-si">Cushion House ශාඛාව</span><span class="t-ta">குஷன் ஹவுஸ் கிளை</span></div>
+        </div>
+      </div>
+      <ul class="svc-list">
+        <li><div><strong><span class="t-en">Motorcycle Seat Reupholstery</span><span class="t-si">යතුරුපැදි ආසන ආවරණ</span><span class="t-ta">மோட்டார்சைக்கிள் இருக்கை</span></strong></div></li>
+        <li><div><strong><span class="t-en">Three-Wheeler Interior Cushion Work</span><span class="t-si">ත්‍රිරෝද interior කුෂන්</span><span class="t-ta">மூன்று சக்கர உள்ளக குஷன்</span></strong></div></li>
+        <li><div><strong><span class="t-en">Foam Padding Replacement</span><span class="t-si">Foam ප්‍රතිස්ථාපනය</span><span class="t-ta">ஃபோம் பேடிங் மாற்று</span></strong></div></li>
+        <li><div><strong><span class="t-en">Custom Interior Fitting</span><span class="t-si">Custom Interior</span><span class="t-ta">தனிப்பயன் உள்ளக பொருத்தம்</span></strong></div></li>
+        <li><div><strong><span class="t-en">Seat Repair &amp; Restoration</span><span class="t-si">ආසන අලුත්වැඩියා</span><span class="t-ta">இருக்கை பழுது மீட்டெடுப்பு</span></strong></div></li>
+        <li><div><strong><span class="t-en">Waterproof Cover Solutions</span><span class="t-si">ජලනිරෝධක ආවරණ</span><span class="t-ta">நீர்ப்புகா கவர் தீர்வுகள்</span></strong></div></li>
+      </ul>
+
+      <!-- Cushion House photo
+      ╔═══════════════════════════════════════════════╗
+      ║  REPLACE → images/cushion-house.jpg           ║
+      ║  Delete this photo-placeholder div and paste: ║
+      ║  <img src="images/cushion-house.jpg"          ║
+      ║       alt="Cushion House"                     ║
+      ║       style="width:100%;display:block;        ║
+      ║              object-fit:cover;                ║
+      ║              aspect-ratio:16/9;"/>            ║
+      ╚═══════════════════════════════════════════════╝ -->
+      <div style="margin-top:2rem">
+        <div class="photo-placeholder" id="photo-cushion" style="aspect-ratio:16/9">
+          <div class="pc tl"></div><div class="pc tr"></div>
+          <div class="pc bl"></div><div class="pc br"></div>
+          <img src="images/cushion-house.jpg"          ║
+      ║       alt="Cushion House"                     ║
+      ║       style="width:100%;display:block;        ║
+      ║              object-fit:cover;                ║
+      ║              aspect-ratio:16/9;"/>
+        </div>
+        <div style="background:rgba(208,2,27,0.12);border:1px solid rgba(208,2,27,0.25);padding:0.6rem 1rem;margin-top:0.4rem;text-align:center">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red)">Ishan Motors Cushion House · Polonnaruwa</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     WHY CHOOSE US
+═══════════════════════════════════════════════════ -->
+<section id="why">
+  <div class="swrap" style="padding-bottom:4rem">
+    <div class="shdr" style="margin-bottom:2.5rem">
+      <div class="snum">03</div>
+      <div class="stblock">
+        <div class="seyebrow"><span class="t-en">Our Commitment</span><span class="t-si">අපේ කැපවීම</span><span class="t-ta">எங்கள் அர்ப்பணிப்பு</span></div>
+        <div class="stitle"><span class="t-en">Why Polonnaruwa Trusts Us</span><span class="t-si">ඇයි Polonnaruwa අපව විශ්වාස කරයි</span><span class="t-ta">ஏன் பொலன்னறுவை எங்களை நம்புகிறது</span></div>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1240px;margin:0 auto;padding:0 1.5rem 6rem">
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <span class="why-icon">🏆</span>
+        <div class="why-title"><span class="t-en">DPMC Authorized</span><span class="t-si">DPMC අධිකෘත</span><span class="t-ta">DPMC அங்கீகரிக்கப்பட்ட</span></div>
+        <p class="why-desc"><span class="t-en">Official DPMC dealer — every service and part is factory-backed and warranty-compliant.</span><span class="t-si">නිල DPMC ව්‍යාපාරිකයෙකු ලෙස, Warranty ක්ෂ නොවේ.</span><span class="t-ta">உத்தியோகபூர்வ DPMC விற்பனையாளராக, உற்பத்தியாளர் ஆதரிக்கிறது.</span></p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-icon">🔩</span>
+        <div class="why-title"><span class="t-en">Only Genuine Parts</span><span class="t-si">නිෂ්පාදිත කොටස් පමණ</span><span class="t-ta">உண்மையான பாகங்கள் மட்டும்</span></div>
+        <p class="why-desc"><span class="t-en">100% authentic Bajaj spare parts only. Counterfeits cost more — we refuse to compromise.</span><span class="t-si">100% සත්‍ය Bajaj කොටස් පමණි.</span><span class="t-ta">100% உண்மையான Bajaj பாகங்கள் மட்டுமே.</span></p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-icon">🛠️</span>
+        <div class="why-title"><span class="t-en">Expert Technicians</span><span class="t-si">විශේෂඥ තාක්‍ෂණිකයන්</span><span class="t-ta">நிபுண தொழில்நுட்பவியலாளர்கள்</span></div>
+        <p class="why-desc"><span class="t-en">Our team specializes exclusively in Bajaj vehicles — motorcycles, three-wheelers, and QUTE.</span><span class="t-si">Bajaj වාහන පමණ සඳහා විශේෂිත කණ්ඩායම.</span><span class="t-ta">Bajaj வாகனங்களில் மட்டும் நிபுணத்துவம்.</span></p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-icon">📍</span>
+        <div class="why-title"><span class="t-en">Local, Trusted Name</span><span class="t-si">ප්‍රාදේශීය, විශ්වාසදායක</span><span class="t-ta">உள்ளூர், நம்பகமான பெயர்</span></div>
+        <p class="why-desc"><span class="t-en">Proudly serving Polonnaruwa and the North Central Province. We are part of this community.</span><span class="t-si">Polonnaruwa සහ ප්‍රාදේශීය ජනතාවට ආඩම්බරයෙන් සේවා.</span><span class="t-ta">பொலன்னறுவை மக்களுக்கு பெருமையுடன் சேவை செய்கிறோம்.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Brands -->
+<section id="brands">
+  <div class="swrap">
+    <div style="text-align:center;margin-bottom:2rem">
+      <p style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--text-muted)">
+        <span class="t-en">Brands &amp; Partners We Work With</span>
+        <span class="t-si">අපි කටයුතු කරන වෙළඳ නාම</span>
+        <span class="t-ta">நாங்கள் பணிபுரியும் பிராண்டுகள்</span>
+      </p>
+    </div>
+    <div class="brands-row">
+      <div class="brand-chip">Bajaj</div><div class="brand-sep"></div>
+      <div class="brand-chip">DPMC</div><div class="brand-sep"></div>
+      <div class="brand-chip">Qute</div><div class="brand-sep"></div>
+      <div class="brand-chip">DTSi</div><div class="brand-sep"></div>
+      <div class="brand-chip">RE</div><div class="brand-sep"></div>
+      <div class="brand-chip">Pulsar</div><div class="brand-sep"></div>
+      <div class="brand-chip">Platina</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     CONTACT
+═══════════════════════════════════════════════════ -->
+<section id="contact">
+  <div class="swrap">
+    <div class="shdr reveal">
+      <div class="snum">04</div>
+      <div class="stblock">
+        <div class="seyebrow"><span class="t-en">Find Us</span><span class="t-si">අපව සොයා ගන්න</span><span class="t-ta">எங்களை கண்டுபிடியுங்கள்</span></div>
+        <div class="stitle"><span class="t-en">Get in Touch</span><span class="t-si">සම්බන්ධ වන්න</span><span class="t-ta">தொடர்புகொள்ளுங்கள்</span></div>
+      </div>
+    </div>
+
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="ci"><div class="ci-icon">📍</div><div><div class="ci-label"><span class="t-en">Workshop Address</span><span class="t-si">ලිපිනය</span><span class="t-ta">முகவரி</span></div><div class="ci-value">No. 23/30, Akkara 500,<br/>New Town, Polonnaruwa, Sri Lanka</div></div></div>
+        <div class="ci"><div class="ci-icon">📞</div><div><div class="ci-label"><span class="t-en">Phone — Main Line</span><span class="t-si">ප්‍රධාන දුරකථනය</span><span class="t-ta">முக்கிய தொலைபேசி</span></div><div class="ci-value"><a href="tel:0272225594">027 222 5594</a></div></div></div>
+        <div class="ci"><div class="ci-icon">📱</div><div><div class="ci-label"><span class="t-en">Mobile — WhatsApp</span><span class="t-si">ජංගම — WhatsApp</span><span class="t-ta">மொபைல் — WhatsApp</span></div><div class="ci-value"><a href="tel:0776027179">077 602 7179</a></div></div></div>
+        <div class="ci"><div class="ci-icon">🏢</div><div><div class="ci-label"><span class="t-en">Dealer Status</span><span class="t-si">ව්‍යාපාරික</span><span class="t-ta">விற்பனையாளர்</span></div><div class="ci-value">Authorized DPMC / Bajaj Dealer</div></div></div>
+
+        <div class="hours-panel">
+          <div class="hours-title"><span class="t-en">Opening Hours</span><span class="t-si">විවෘත කාල</span><span class="t-ta">திறக்கும் நேரம்</span></div>
+          <div class="hours-row"><span class="hours-day"><span class="t-en">Monday – Friday</span><span class="t-si">සඳුදා – සිකුරාදා</span><span class="t-ta">திங்கள் – வெள்ளி</span></span><span class="hours-time">8:00 AM – 6:00 PM</span></div>
+          <div class="hours-row"><span class="hours-day"><span class="t-en">Saturday</span><span class="t-si">සෙනසුරාදා</span><span class="t-ta">சனிக்கிழமை</span></span><span class="hours-time">8:00 AM – 5:00 PM</span></div>
+          <div class="hours-row"><span class="hours-day"><span class="t-en">Sunday</span><span class="t-si">ඉරිදා</span><span class="t-ta">ஞாயிற்றுக்கிழமை</span></span><span class="hours-time"><span class="t-en">By Appointment</span><span class="t-si">හමුවීම අනුව</span><span class="t-ta">சந்திப்பின்படி</span></span></div>
+        </div>
+      </div>
+
+      <div class="form-panel reveal">
+        <div style="margin-bottom:1.5rem">
+          <p style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--text-primary);margin-bottom:0.25rem">
+            <span class="t-en">Send an Enquiry</span><span class="t-si">විමසුමක් යවන්න</span><span class="t-ta">விசாரணை அனுப்பவும்</span>
+          </p>
+          <p style="font-size:13px;color:var(--text-secondary)">
+            <span class="t-en">Service bookings, parts availability, or any question — we'll reply promptly.</span>
+            <span class="t-si">සේවා, කොටස් හෝ ඕනෑම ප්‍රශ්නයකට ඉක්මනින් ප්‍රතිචාර.</span>
+            <span class="t-ta">சேவை முன்பதிவுகள் அல்லது கேள்விகளுக்கு விரைவாக பதிலளிப்போம்.</span>
+          </p>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><span class="t-en">Your Name</span><span class="t-si">ඔබේ නම</span><span class="t-ta">உங்கள் பெயர்</span></label>
+          <input type="text" class="form-input" placeholder="Enter your full name"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><span class="t-en">Phone Number</span><span class="t-si">දුරකථන අංකය</span><span class="t-ta">தொலைபேசி எண்</span></label>
+          <input type="tel" class="form-input" placeholder="077 xxx xxxx"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><span class="t-en">Service Required</span><span class="t-si">සේවා වර්ගය</span><span class="t-ta">சேவை வகை</span></label>
+          <select class="form-input">
+            <option value=""><span class="t-en">Select a service...</span></option>
+            <option>Mechanical Repair / Servicing</option>
+            <option>DTSi Oil Change</option>
+            <option>Genuine Spare Parts</option>
+            <option>Cushion / Upholstery Work</option>
+            <option>QUTE Service</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><span class="t-en">Message</span><span class="t-si">පණිවිඩය</span><span class="t-ta">செய்தி</span></label>
+          <textarea class="form-input" placeholder="Describe your vehicle and what you need..."></textarea>
+        </div>
+        <button class="btn-primary" style="width:100%;justify-content:center" onclick="submitForm()">
+          <span class="t-en">Send Enquiry ▸</span>
+          <span class="t-si">විමසුම යවන්න ▸</span>
+          <span class="t-ta">அனுப்பவும் ▸</span>
+        </button>
+        <p style="font-size:10px;color:var(--text-muted);margin-top:1rem;text-align:center;letter-spacing:1px">
+          <span class="t-en">We typically respond within a few hours during working days.</span>
+          <span class="t-si">වැඩ කරන දිනවල ටික වේලාවකින් ප්‍රතිචාර.</span>
+          <span class="t-ta">வேலை நாட்களில் சில மணி நேரத்தில் பதில்.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════ -->
+<footer>
+  <div class="f-inner">
+    <div class="f-top">
+      <div class="f-brand">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem">
+          <img src="images/logo.png" alt="Ishan Motors Logo"
+     style="height:100px; width:auto; object-fit:contain;"/>
+          <div>
+            <div class="logo-main" style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;line-height:1.1">Ishan Motors</div>
+            <div class="logo-sub" style="font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--red)">Polonnaruwa, Sri Lanka</div>
+          </div>
+        </div>
+        <p>
+          <span class="t-en">Polonnaruwa's authorized DPMC dealer. Specialists in Bajaj motorcycles, three-wheelers, QUTE, genuine spare parts, and premium cushion work.</span>
+          <span class="t-si">DPMC අධිකෘත ව්‍යාපාරිකයා. Bajaj, ත්‍රිරෝද රථ, QUTE, කොටස් සහ Cushion House.</span>
+          <span class="t-ta">அங்கீகரிக்கப்பட்ட DPMC விற்பனையாளர். Bajaj, மூன்று சக்கர வாகனங்கள், QUTE மற்றும் குஷன் சேவைகள்.</span>
+        </p>
+        <div style="margin-top:1.25rem;display:flex;gap:0.75rem;flex-wrap:wrap">
+          <a href="tel:0272225594" class="btn-primary" style="font-size:11px;padding:0.5rem 1rem">📞 027 222 5594</a>
+          <a href="tel:0776027179" style="display:inline-flex;align-items:center;gap:0.45rem;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:0.5rem 1rem;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.65);text-decoration:none">📱 077 602 7179</a>
+        </div>
+      </div>
+      <div>
+        <div class="f-coltitle"><span class="t-en">Services</span><span class="t-si">සේවා</span><span class="t-ta">சேவைகள்</span></div>
+        <ul class="f-links">
+          <li><a href="#services">Bajaj Motorcycle Service</a></li>
+          <li><a href="#services">Three-Wheeler Repairs</a></li>
+          <li><a href="#services">QUTE Servicing</a></li>
+          <li><a href="#services">DTSi Oil Change</a></li>
+          <li><a href="#services">Genuine Spare Parts</a></li>
+          <li><a href="#services">Cushion &amp; Interior Work</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-coltitle"><span class="t-en">Contact</span><span class="t-si">සම්බන්ධ</span><span class="t-ta">தொடர்பு</span></div>
+        <ul class="f-links">
+          <li><a href="#">No. 23/30, Akkara 500</a></li>
+          <li><a href="#">New Town, Polonnaruwa</a></li>
+          <li><a href="tel:0272225594">027 222 5594</a></li>
+          <li><a href="tel:0776027179">077 602 7179</a></li>
+        </ul>
+        <div style="margin-top:1.5rem">
+          <div class="f-coltitle">Authorized By</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;color:rgba(255,255,255,0.32)">DPMC · Bajaj</div>
+        </div>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>© 2025 Ishan Motors, Polonnaruwa. All rights reserved.</span>
+      <span>Authorized DPMC Dealer — <a href="tel:0272225594">027 222 5594</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════ -->
+<script>
+const html = document.documentElement;
+
+/* ── THEME TOGGLE ──────────────────────────────────── */
+function toggleTheme() {
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  const next = isDark ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  document.getElementById('theme-icon').textContent = next === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('im-theme', next);
+}
+
+/* ── LANGUAGE SWITCH ───────────────────────────────── */
+function setLang(lang) {
+  html.setAttribute('data-lang', lang);
+  html.setAttribute('lang', { en:'en', si:'si', ta:'ta' }[lang]);
+  localStorage.setItem('im-lang', lang);
+  ['en','si','ta'].forEach(l => {
+    ['btn-','mbtn-'].forEach(p => {
+      const el = document.getElementById(p + l);
+      if (el) el.classList.toggle('active', l === lang);
+    });
+  });
+}
+
+/* ── RESTORE PREFERENCES ───────────────────────────── */
+(function init() {
+  const savedTheme = localStorage.getItem('im-theme');
+  if (savedTheme) {
+    html.setAttribute('data-theme', savedTheme);
+    document.getElementById('theme-icon').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+  }
+  const savedLang = localStorage.getItem('im-lang');
+  if (savedLang) setLang(savedLang);
+})();
+
+/* ── MOBILE MENU ───────────────────────────────────── */
+function toggleMob() {
+  document.getElementById('mob-menu').classList.toggle('open');
+}
+document.addEventListener('click', e => {
+  const menu = document.getElementById('mob-menu');
+  const nav = document.getElementById('main-nav');
+  if (menu.classList.contains('open') && !menu.contains(e.target) && !nav.contains(e.target))
+    menu.classList.remove('open');
+});
+
+/* ── SCROLL PROGRESS BAR ───────────────────────────── */
+const bar = document.getElementById('scroll-bar');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+}, { passive: true });
+
+/* ── SMOOTH SCROLL for all anchor links ────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+/* ── SCROLL REVEAL ─────────────────────────────────── */
+const revObs = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      // Stagger siblings nicely
+      const siblings = [...(entry.target.parentElement?.querySelectorAll('.reveal') || [])];
+      const idx = siblings.indexOf(entry.target);
+      setTimeout(() => entry.target.classList.add('visible'), idx * 75);
+      revObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+/* ── SCROLL SPY ────────────────────────────────────── */
+const secs = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY + 80;
+  secs.forEach(s => {
+    const a = document.querySelector(`.desk-nav a[href="#${s.id}"]`);
+    if (a) a.style.color = (y >= s.offsetTop && y < s.offsetTop + s.offsetHeight)
+      ? 'var(--text-primary)' : '';
+  });
+}, { passive: true });
+
+/* ── HERO BACKGROUND IMAGE ─────────────────────────────
+   Reads  data-bg="images/hero-workshop.jpg"  from the
+   <section id="hero"> element and applies it as the
+   CSS background-image with transparency overlay.
+
+   HOW TO USE IN VS CODE:
+     1. Save your workshop photo in the same folder, e.g.:
+           images/hero-workshop.jpg
+     2. Find <section id="hero"> in this file
+     3. Add the attribute:
+           data-bg="images/hero-workshop.jpg"
+        So it reads: <section id="hero" data-bg="images/hero-workshop.jpg">
+     4. Save the file and open it in your browser.
+────────────────────────────────────────────────────── */
+(function applyHeroBg() {
+  const hero = document.getElementById('hero');
+  if (!hero) return;
+  const src = hero.getAttribute('data-bg');
+  if (src) {
+    hero.style.setProperty('--hero-bg-img', `url('${src}')`);
+  }
+})();
+
+/* ── FORM SUBMIT ───────────────────────────────────── */
+function submitForm() {
+  const lang = html.getAttribute('data-lang');
+  const msgs = {
+    en: "Thank you! We'll contact you shortly on your provided number.",
+    si: "ස්තූතියි! ඉක්මනින් ඔබව අමතන්නෙමු.",
+    ta: "நன்றி! விரைவில் உங்களை தொடர்பு கொள்வோம்."
+  };
+  alert(msgs[lang] || msgs.en);
+}
+</script>
+</body>
+</html>
